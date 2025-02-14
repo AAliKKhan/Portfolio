@@ -46,10 +46,10 @@ const Footer = () => {
           {/* Contact & Socials */}
           <div>
             <h3 className="text-lg font-semibold">Connect with Me</h3>
-            <p className="mt-2 text-sm text-gray-300">email@example.com</p>
+            <p className="mt-2 text-sm text-gray-300">muhammda014@gmail.com</p>
             <div className="flex justify-center md:justify-start mt-4 space-x-5">
             <Link
-        href="https://linkedin.com"
+        href="https://www.linkedin.com/in/muhammad-ali-adnan-48035a2b8/"
         target="_blank"
         className="text-teal-500 hover:text-teal-300 transition-all duration-300 transform hover:scale-110"
       >
@@ -57,7 +57,7 @@ const Footer = () => {
       </Link>
 
       <Link
-        href="https://github.com"
+        href="https://github.com/AAliKKhan"
         target="_blank"
         className="text-teal-500 hover:text-teal-300 transition-all duration-300 transform hover:scale-110"
       >
