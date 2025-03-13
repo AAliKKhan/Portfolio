@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialMediaCard from "../navigator";
 
-// Sample Project Data
 const projects = [
   {
     id: 1,
@@ -14,75 +13,135 @@ const projects = [
   },
   {
     id: 2,
-    title: "Dynamic Resume Builder",
-    image: "/2.png",
-    link: "https://resume-builder.com",
-  },
-  {
-    id: 3,
-    title: "The Scholars Learning Center",
-    image: "/3.png",
-    link: "https://scholarslearning.com",
-  },
-  {
-    id: 4,
-    title: "One-Rep Max Calculator",
-    image: "/4.png",
-    link: "https://orm-calculator.com",
-  },
-  {
-    id: 5,
-    title: "Image Carousel Component",
-    image: "/1.png",
-    link: "https://carousel-component.com",
-  },
-  {
-    id: 6,
-    title: "Horror Flash Game",
-    image: "/6.png",
-    link: "https://horror-game.com",
+    title: "ScentCraft",
+    image: "/2.jpg",
+    link: "https://scentcraft-tan.vercel.app/",
   },
 ];
 
+const cardVariants = {
+  offscreen: {
+    y: 30,
+    opacity: 0,
+  },
+  onscreen: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 0.6,
+    },
+  },
+};
+
 export default function MyProjects() {
   return (
-    <section  className="py-16   bg-gradient-to-b from-[#2d2f31] to-darkBg " id="Projects">
-       <SocialMediaCard></SocialMediaCard>
-      <div className="container mx-auto px-6 text-center mt-[70px] md:mt-[120px] lg:mt-[200px]">
-<motion.h2
-  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600"
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
->
-📂 My Projects
-</motion.h2>
+    <section className="py-12 md:py-24 bg-darkBg" id="Projects">
+      <div className="container mx-auto px-4 md:px-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-12 md:mb-16 text-center"
+        >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-neutral-100 mb-3 md:mb-4">
+            Selected Works
+          </h2>
+          <div className="w-16 md:w-24 h-0.5 md:h-1 bg-teal-400 mx-auto rounded-full" />
+        </motion.div>
 
-
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {projects.map((project) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              whileHover={{ scale: 1.05 }}
-              className="relative group overflow-hidden rounded-2xl shadow-lg"
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={cardVariants}
+              className="relative group"
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={400}
-                height={250}
-                className="w-full h-56 object-cover transition duration-300 group-hover:opacity-50"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-300">
-                <Link href={project.link} target="_blank">
-                  <span className="text-white text-lg font-semibold bg-blue-600 px-4 py-2 rounded-md shadow-lg hover:bg-blue-700 transition">
-                    View Project
-                  </span>
-                </Link>
+              <div className="relative overflow-hidden rounded-xl md:rounded-2xl bg-neutral-800 shadow-lg md:shadow-2xl shadow-black/30">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={600}
+                  height={400}
+                  className="w-full h-48 md:h-64 object-cover transform transition-transform duration-500 group-hover:scale-105"
+                  priority={index < 2}
+                />
+
+                {/* Mobile-only title overlay */}
+                <div className="md:hidden absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                  <h3 className="text-lg font-medium text-neutral-100">
+                    {project.title}
+                  </h3>
+                </div>
+
+                {/* Desktop hover overlay */}
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-full">
+                      <h3 className="text-xl font-medium text-neutral-100 mb-2">
+                        {project.title}
+                      </h3>
+                      <Link
+                        href={project.link}
+                        target="_blank"
+                        className="inline-flex items-center space-x-2 text-teal-400 hover:text-teal-300 transition-colors px-4 py-2"
+                      >
+                        <span className="text-sm md:text-base font-medium">
+                          View
+                        </span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 md:h-5 md:w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* Mobile link button */}
+              <Link
+                href={project.link}
+                target="_blank"
+                className="md:hidden absolute bottom-4 right-4 bg-teal-600/90 hover:bg-teal-700/90 text-neutral-100 rounded-lg px-3 py-1.5 transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="mt-12 md:mt-20"
+        >
+          <SocialMediaCard />
+        </motion.div>
       </div>
     </section>
   );
