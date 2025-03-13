@@ -1,66 +1,148 @@
 "use client";
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SocialMediaCard from "../navigator";
 
-
 const Hero = () => {
+  // Floating animation - reduced complexity
+  const floatingVariants = useMemo(() => ({
+    float: {
+      y: [-5, 5, -5],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  }), []);
+
+  // Text Animation (Memoized)
+  const textVariants = useCallback((i: number) => ({
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.08, // Faster appearance
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }), []);
+
+  // Background Grid (CSS instead of animation for performance)
+  const letters = "ALI".split("");
+
+  // Memoized Floating Particles
+  const floatingParticles = useMemo(() => (
+    [...Array(10)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-1 h-1 bg-teal-400 rounded-full"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`
+        }}
+        animate={{
+          y: [0, -30],
+          opacity: [0.7, 0],
+          scale: [1, 1.5]
+        }}
+        transition={{
+          duration: 3 + Math.random() * 2,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+    ))
+  ), []);
+
   return (
-    <section className="relative flex flex-col lg:flex-row items-center justify-center px-6 sm:px-12 lg:px-20 py-20 min-h-screen bg-darkBg text-white overflow-hidden  bg-gradient-to-b from-darkBg to-[#2d2f31]">
-       <SocialMediaCard></SocialMediaCard>
-      {/* Floating Background Elements */}
-      <motion.div
-        className="absolute w-32 h-32 bg-teal-600 rounded-full top-10 left-10 opacity-20 blur-3xl"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ repeat: Infinity, duration: 6 }}
-      />
-      <motion.div
-        className="absolute w-24 h-24 bg-green-600 rounded-full bottom-10 right-10 opacity-20 blur-3xl"
-        animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
-        transition={{ repeat: Infinity, duration: 8 }}
-      />
+    <section className="relative flex flex-col lg:flex-row items-center justify-center px-6 sm:px-12 lg:px-20 py-20 min-h-screen bg-darkBg text-white overflow-hidden">
+      {/* Background Layer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-teal-900/20 to-darkBg">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
+        {floatingParticles}
+      </div>
+
 
       {/* Left Section - Text */}
-      <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
-        <motion.h1
-          className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight bg-gradient-to-b from-gray-600 to-teal-500 bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <span className="text-gray-300">Hello, I Am </span>ALI
-        </motion.h1>
+      <div className="w-full lg:w-1/2 space-y-8 text-center lg:text-left z-10">
+        <motion.div className="overflow-hidden" initial="hidden" animate="visible">
+          <h1 className="text-5xl sm:text-7xl font-bold tracking-tighter">
+            <span className="text-gray-300 block mb-4">Hello, I'm </span>
+            {letters.map((letter, i) => (
+              <motion.span
+                key={i}
+                className="inline-block bg-gradient-to-r from-teal-400 to-cyan-500 bg-clip-text text-transparent"
+                variants={textVariants(i)}
+                initial="hidden"
+                animate="visible"
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </h1>
+        </motion.div>
 
-        <motion.p
-          className="text-lg text-gray-400 max-w-md mx-auto lg:mx-0"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-        >
-          Crafting inovative and elegant digital experiences through clean design and scalable code.
+        <motion.p className="text-xl text-gray-400 max-w-xl mx-auto lg:mx-0">
+          Crafting next-gen digital experiences through{" "}
+          <span className="bg-gradient-to-r from-teal-400 to-cyan-500 bg-clip-text text-transparent font-medium">
+            innovative design
+          </span>{" "}
+          and{" "}
+          <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent font-medium">
+            cutting-edge development
+          </span>
         </motion.p>
 
-
+        <div className="flex gap-4 justify-center lg:justify-start">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-full font-medium shadow-lg"
+          >
+            View Work
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 border-2 border-teal-500/50 rounded-full font-medium hover:bg-teal-500/10 transition-colors"
+          >
+            Contact
+          </motion.button>
+        </div>
       </div>
 
-      {/* Right Section - Futuristic Photo Frame */}
-      <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mt-12 lg:mt-0 border-2 border-gray-800 rounded-2xl flex items-center justify-center shadow-xl">
-        {/* Animated Border Frame */}
+      {/* Right Section - Holographic Photo */}
+      <motion.div
+        className="relative w-72 h-72 lg:w-96 lg:h-96 mt-16 lg:mt-0 z-10"
+        variants={floatingVariants}
+        animate="float"
+      >
+        {/* Glowing Core */}
         <motion.div
-          className="absolute inset-0 rounded-2xl border-2 border-teal-500 opacity-50 animate-pulse"
-          animate={{ rotate: [0, 180, 360] }}
-          transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+          className="absolute inset-0 bg-teal-500/20 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 3, repeat: Infinity }}
         />
-        <Image
-          src="/Ali2.png"
-          alt="Profile"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-2xl"
-        />
-      </div>
 
+        {/* Profile Image with Optimized Quality */}
+        <motion.div className="relative w-full h-full rounded-3xl overflow-hidden">
+          <Image
+            src="/Ali2.png"
+            alt="Profile"
+            fill
+            quality={80}
+            priority={false}
+            className="object-cover"
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Background Gradient (CSS-based) */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-[500px] bg-gradient-to-l from-teal-500/10 to-transparent -skew-x-12 blur-3xl" />
     </section>
   );
 };

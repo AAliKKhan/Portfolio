@@ -1,94 +1,168 @@
 "use client";
-
 import React from "react";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaFigma } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiStripe, SiCanva, SiSanity } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaFigma, FaDatabase } from "react-icons/fa";
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiStripe, SiCanva, SiSanity, SiGraphql, SiDocker } from "react-icons/si";
 import SocialMediaCard from "../navigator";
 
-// Dynamically import motion for animations
-const MotionDiv = dynamic(() => import("framer-motion").then((mod) => mod.motion.div), { ssr: false });
-const MotionH2 = dynamic(() => import("framer-motion").then((mod) => mod.motion.h2), { ssr: false });
-const MotionP = dynamic(() => import("framer-motion").then((mod) => mod.motion.p), { ssr: false });
+const FloatingOrbs = dynamic(() => import("../FloatingOrbs"), { ssr: false });
 
 const About = () => {
-  return (
-    <section  className="relative bg-gradient-to-b from-[#2d2f31] to-darkBg text-white py-20 px-6 md:px-12 lg:px-24">
-       <SocialMediaCard></SocialMediaCard>
-      <div className="max-w-5xl mx-auto text-center " id="AboutMe">
-        <MotionH2
-          className="text-4xl font-bold text-gray-200"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          I'm a Frontend Developer. Pleasure to meet you.
-        </MotionH2>
-        <MotionP
-          className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          I’m a Frontend Developer with experience in backend technologies as well, allowing me to build complete web applications with seamless integrations. My expertise lies in crafting dynamic and scalable user interfaces. My goal is to create high-performance, scalable, and user-centric web applications that deliver a seamless experience. Following are my skils and tools which I use to craft my websites.
-        </MotionP>
-      </div>
+  const skills = [
+    {
+      title: "Full-Stack Foundation",
+      description: "End-to-end web development capabilities",
+      items: [
+        { name: "TypeScript", icon: <SiTypescript className="text-blue-600" /> },
+        { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" /> },
+        { name: "Node.js", icon: <FaNode className="text-green-500" /> },
+        { name: "GraphQL", icon: <SiGraphql className="text-pink-500" /> },
+        { name: "PostgreSQL", icon: <FaDatabase className="text-blue-400" /> },
+        { name: "Docker", icon: <SiDocker className="text-blue-400" /> },
+      ],
+    },
+    {
+      title: "UI Engineering",
+      description: "Crafting modern user interfaces",
+      items: [
+        { name: "React", icon: <FaReact className="text-blue-400" /> },
+        { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-400" /> },
+        { name: "Framer Motion", icon: <span className="text-white">⤸</span> },
+        { name: "Three.js", icon: <span className="text-white">◯</span> },
+        { name: "Figma", icon: <FaFigma className="text-pink-500" /> },
+        { name: "Storybook", icon: <span className="text-pink-300">📕</span> },
+      ],
+    },
+    {
+      title: "DevOps & Services",
+      description: "Cloud infrastructure & integrations",
+      items: [
+        { name: "Vercel", icon: <span className="text-white">▲</span> },
+        { name: "AWS", icon: <span className="text-orange-500">☁️</span> },
+        { name: "Stripe", icon: <SiStripe className="text-purple-500" /> },
+        { name: "Sanity", icon: <SiSanity className="text-red-500" /> },
+        { name: "GitHub Actions", icon: <span className="text-white">⚡</span> },
+        { name: "Redis", icon: <span className="text-red-400">🗃️</span> },
+      ],
+    },
+  ];
 
-      {/* Skills Section */}
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto p-6 bg-white/10 rounded-xl shadow-xl"  id="Skills">
-        {[
-          {
-            title: "Frontend Development",
-            description: "Building fast and scalable user interfaces with modern web technologies.",
-            items: [
-              { name: "HTML", icon: <FaHtml5 className="text-orange-500" /> },
-              { name: "CSS", icon: <FaCss3Alt className="text-blue-500" /> },
-              { name: "JavaScript", icon: <FaJs className="text-yellow-500" /> },
-              { name: "TypeScript", icon: <SiTypescript className="text-blue-700" /> },
-              { name: "React", icon: <FaReact className="text-blue-400" /> },
-              { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" /> },
-              { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-400" /> },
-            ],
-          },
-          {
-            title: "Backend Authentication",
-            description: "Handling authentication and backend logic for secure and dynamic applications.",
-            items: [
-              { name: "NextAuth", icon: <SiNextdotjs className="text-black dark:text-white" /> },
-              { name: "Clerk", icon: <SiNextdotjs className="text-black dark:text-white" /> },
-              { name: "Stripe", icon: <SiStripe className="text-purple-500" /> },
-              { name: "Sanity", icon: <SiSanity className="text-red-500" /> },
-            ],
-          },
-          {
-            title: "Design & UI/UX",
-            description: "Creating visually appealing designs with industry-standard tools.",
-            items: [
-              { name: "Figma", icon: <FaFigma className="text-pink-500" /> },
-              { name: "Canva", icon: <SiCanva className="text-blue-400" /> },
-            ],
-          },
-        ].map((category, index) => (
-          <MotionDiv
-            key={index}
-            className="p-6 bg-white/5 rounded-lg shadow-md"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 * index }}
+  const cardVariants = {
+    offscreen: { y: 50, opacity: 0 },
+    onscreen: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", bounce: 0.4, duration: 0.8 }
+    }
+  };
+
+  return (
+    <section className="relative bg-gradient-to-b from-[#1a1d21] to-darkBg text-white py-28 px-4 md:px-8" id="AboutMe">
+      <FloatingOrbs />
+      <SocialMediaCard />
+
+      <div className="max-w-7xl mx-auto">
+        {/* Animated Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-24"
+        >
+          <motion.h2
+            className="text-4xl md:text-6xl font-light mb-6"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
           >
-            <h3 className="text-xl font-semibold text-gray-200 flex items-center gap-2">
-              {category.title}
-            </h3>
-            <p className="mt-3 text-gray-400">{category.description}</p>
-            <ul className="mt-3 space-y-2 text-gray-300">
-              {category.items.map((item, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  {item.icon} {item.name}
-                </li>
+            <span className="bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent">
+              Full-Stack Engineer
+            </span>
+          </motion.h2>
+          
+          <motion.p
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Building complete digital experiences from concept to deployment. 
+            Specializing in modern web architectures with focus on performance, 
+            scalability, and maintainability.
+          </motion.p>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {skills.map((category, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] p-8 backdrop-blur-lg border border-white/10 hover:border-teal-400/20 transition-all duration-300 shadow-2xl shadow-black/30"
+              whileHover={{ y: -10 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative z-10">
+                <h3 className="text-xl font-semibold mb-4 text-teal-400">{category.title}</h3>
+                <p className="text-gray-400 mb-6">{category.description}</p>
+                <ul className="grid grid-cols-2 gap-4">
+                  {category.items.map((item, i) => (
+                    <motion.li
+                      key={i}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.2 * i }}
+                    >
+                      <span className="text-2xl">{item.icon}</span>
+                      <span className="text-sm font-medium text-gray-200">{item.name}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Experience Banner */}
+        <motion.div
+          className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-teal-500/10 to-teal-600/10 border border-teal-400/20 backdrop-blur-lg"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2">
+              <h3 className="text-2xl font-semibold text-teal-400">Full-Cycle Development</h3>
+              <p className="text-gray-300">From initial concept through CI/CD to production monitoring</p>
+            </div>
+            <motion.div 
+              className="flex gap-4 text-3xl text-teal-400"
+              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              transition={{ staggerChildren: 0.1 }}
+            >
+              {[<FaReact key="react" />, <SiNextdotjs key="next" />, <FaNode key="node" />, <SiDocker key="docker" />].map((Icon, i) => (
+                <motion.span
+                  key={i}
+                  className="hover:text-white transition-colors"
+                  whileHover={{ y: -5 }}
+                >
+                  {Icon}
+                </motion.span>
               ))}
-            </ul>
-          </MotionDiv>
-        ))}
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
