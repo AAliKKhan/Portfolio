@@ -3,6 +3,7 @@ import React, { useMemo, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SocialMediaCard from "../navigator";
+import Link from "next/link";
 
 const Hero = () => {
   // Floating animation - reduced complexity
@@ -75,7 +76,7 @@ const Hero = () => {
             {letters.map((letter, i) => (
               <motion.span
                 key={i}
-                className="inline-block bg-gradient-to-r from-teal-400 to-cyan-500 bg-clip-text text-transparent"
+                className="inline-block bg-gradient-to-r from-teal-400 to-teal-600 bg-clip-text text-transparent"
                 variants={textVariants(i)}
                 initial="hidden"
                 animate="visible"
@@ -92,7 +93,7 @@ const Hero = () => {
             innovative design
           </span>{" "}
           and{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent font-medium">
+          <span className="bg-gradient-to-r from-cyan-300 to-teal-600 bg-clip-text text-transparent font-medium">
             cutting-edge development
           </span>
         </motion.p>
@@ -103,14 +104,19 @@ const Hero = () => {
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-full font-medium shadow-lg"
           >
+            <Link href="#Projects">
             View Work
+            </Link>
+            
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 border-2 border-teal-500/50 rounded-full font-medium hover:bg-teal-500/10 transition-colors"
           >
-            Contact
+              <Link href="/Chat">
+             Contact
+            </Link>
           </motion.button>
         </div>
       </div>

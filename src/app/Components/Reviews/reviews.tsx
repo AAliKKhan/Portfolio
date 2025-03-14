@@ -5,15 +5,10 @@ import { motion } from "framer-motion";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SocialMediaCard from "../navigator";
+import { useInView } from "react-intersection-observer";
 
 const testimonials = [
-  {
-    name: "Ali Adnan",
-    review:
-      "Exceptional work! The design was sleek, and the functionality was beyond expectations.",
-    company: "CEO, Pika Pick",
-    image: "/Ali3.jpg",
-  },
+
   {
     name: "Asim Khan",
     review:
@@ -42,21 +37,37 @@ const Testimonials = () => {
     arrows: false,
   };
 
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+
   return (
-    <section className="relative  bg-gradient-to-b from-darkBg to-[#2d2f31]  text-white py-24 px-6 overflow-hidden" id="Reviews">
-       <SocialMediaCard></SocialMediaCard>
+    <motion.section
+      className="relative bg-gradient-to-b from-darkBg to-[#2d2f31] text-white py-24 px-6 overflow-hidden mt-12"
+      id="Reviews"
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}} 
+      transition={{ duration: 0.8 }}
+    >
+      <SocialMediaCard />
       <div className="max-w-6xl mx-auto text-center relative z-10">
-      <motion.h2
-  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600"
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
->
- What Clients Say
-</motion.h2>
+      <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-12 md:mb-16 text-center"
+        >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-neutral-100 mb-3 md:mb-4">
+          What Clients Say
+          </h2>
+          <div className="w-16 md:w-24 h-0.5 md:h-1 bg-teal-400 mx-auto rounded-full" />
+        </motion.div>
 
-
-        <div className="relative mt-12 max-w-4xl mx-auto">
+        <motion.div
+          className="relative mt-12 max-w-4xl mx-auto"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
           <Slider {...sliderSettings}>
             {testimonials.map((testimonial, index) => (
               <motion.div
@@ -64,7 +75,12 @@ const Testimonials = () => {
                 className="p-6"
                 whileHover={{ scale: 1.05, rotate: 1 }}
               >
-                <div className=" bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/15 transition duration-300 hover:bg-white/20">
+                <motion.div
+                  className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/15 transition duration-300 hover:bg-white/20"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                >
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
@@ -75,18 +91,14 @@ const Testimonials = () => {
                     {testimonial.name}
                   </h3>
                   <p className="text-sm text-gray-400">{testimonial.company}</p>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </Slider>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 export default Testimonials;
-
-
-
-

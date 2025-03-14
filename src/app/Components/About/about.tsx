@@ -2,8 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaFigma, FaDatabase } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiStripe, SiCanva, SiSanity, SiGraphql, SiDocker } from "react-icons/si";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaFigma, FaDatabase, FaBootstrap, FaNodeJs } from "react-icons/fa";
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiStripe, SiCanva, SiSanity, SiGraphql, SiDocker, SiClerk, SiPython, SiShadcnui } from "react-icons/si";
 import SocialMediaCard from "../navigator";
 
 const FloatingOrbs = dynamic(() => import("../FloatingOrbs"), { ssr: false });
@@ -14,24 +14,28 @@ const About = () => {
       title: "Full-Stack Foundation",
       description: "End-to-end web development capabilities",
       items: [
+        { name: "Python", icon: <SiPython className="text-yellow-300" /> },
         { name: "TypeScript", icon: <SiTypescript className="text-blue-600" /> },
-        { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" /> },
-        { name: "Node.js", icon: <FaNode className="text-green-500" /> },
+        { name: "Next.js", icon: <SiNextdotjs className="text-slate-600 dark:text-white" /> },
+        { name: "React", icon: <FaReact className="text-blue-400" /> },
+        { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
         { name: "GraphQL", icon: <SiGraphql className="text-pink-500" /> },
-        { name: "PostgreSQL", icon: <FaDatabase className="text-blue-400" /> },
-        { name: "Docker", icon: <SiDocker className="text-blue-400" /> },
+
       ],
     },
     {
       title: "UI Engineering",
       description: "Crafting modern user interfaces",
       items: [
-        { name: "React", icon: <FaReact className="text-blue-400" /> },
+       
         { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-400" /> },
         { name: "Framer Motion", icon: <span className="text-white">⤸</span> },
-        { name: "Three.js", icon: <span className="text-white">◯</span> },
+        { name: "Bootstrap", icon: <FaBootstrap className="text-purple-500" /> },
         { name: "Figma", icon: <FaFigma className="text-pink-500" /> },
-        { name: "Storybook", icon: <span className="text-pink-300">📕</span> },
+        { name: "Shadcn", icon: <SiShadcnui className="text-white" /> },
+        
+        
+
       ],
     },
     {
@@ -39,11 +43,12 @@ const About = () => {
       description: "Cloud infrastructure & integrations",
       items: [
         { name: "Vercel", icon: <span className="text-white">▲</span> },
-        { name: "AWS", icon: <span className="text-orange-500">☁️</span> },
+
         { name: "Stripe", icon: <SiStripe className="text-purple-500" /> },
+        { name: "Clerk", icon: <SiClerk className="text-purple-500" /> },
         { name: "Sanity", icon: <SiSanity className="text-red-500" /> },
         { name: "GitHub Actions", icon: <span className="text-white">⚡</span> },
-        { name: "Redis", icon: <span className="text-red-400">🗃️</span> },
+
       ],
     },
   ];
@@ -58,7 +63,7 @@ const About = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-b from-[#1a1d21] to-darkBg text-white py-28 px-4 md:px-8" id="AboutMe">
+    <section className="relative bg-gradient-to-b from-darkBg to-[#1a1d21] text-white py-28 px-4 md:px-8" id="AboutMe">
       <FloatingOrbs />
       <SocialMediaCard />
 
@@ -151,7 +156,7 @@ const About = () => {
               initial={{ opacity: 0 }}
               transition={{ staggerChildren: 0.1 }}
             >
-              {[<FaReact key="react" />, <SiNextdotjs key="next" />, <FaNode key="node" />, <SiDocker key="docker" />].map((Icon, i) => (
+              {[<FaReact key="react" />, <SiNextdotjs key="next" />, <FaNode key="node" />].map((Icon, i) => (
                 <motion.span
                   key={i}
                   className="hover:text-white transition-colors"

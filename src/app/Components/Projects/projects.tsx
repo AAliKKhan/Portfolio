@@ -37,7 +37,7 @@ const cardVariants = {
 
 export default function MyProjects() {
   return (
-    <section className="py-12 md:py-24 bg-darkBg" id="Projects">
+    <section className="py-12 md:py-24 bg-darkBg " id="Projects">
       <div className="container mx-auto px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0 }}
