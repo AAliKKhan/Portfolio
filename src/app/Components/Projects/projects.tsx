@@ -7,17 +7,54 @@ import SocialMediaCard from "../navigator";
 const projects = [
   {
     id: 1,
-    title: "BLOGALI",
-    image: "/5.png",
-    link: "https://blogali-tau.vercel.app/",
-  },
-  {
-    id: 2,
     title: "ScentCraft",
     image: "/2.jpg",
     link: "https://scentcraft-tan.vercel.app/",
   },
+  {
+    id: 2,
+    title: "Fit Blog",
+    image: "/fitblog.webp",
+    link: "https://fit-blog-livid.vercel.app/",
+  },
+  {
+    id: 3,
+    title: "Free Hit Indoor Cricket",
+    image: "/indoor.webp",
+    link: "https://indoor-cricket-website.vercel.app/",
+  },
+  {
+    id: 4,
+    title: "Blogaly 2.0",
+    image: "/blogaly2.0.webp",
+    link: "https://blog-website-plum-pi.vercel.app/",
+  },
+  {
+    id: 5,
+    title: "Zikkar Allah",
+    image: "/zikar.webp",
+    link: "https://zikarallah.vercel.app/",
+  },
+  {
+    id: 6,
+    title: "Photographers Portfolio",
+    image: "/photo.webp",
+    link: "https://photographes-portfolio-website.vercel.app/",
+  },
+  {
+    id: 7,
+    title: "Blogaly",
+    image: "/5.png",
+    link: "https://blogali-tau.vercel.app/",
+  },
+  {
+    id: 8,
+    title: "EME Services",
+    image: "/eme.webp",
+    link: "https://emeservices.vercel.app/",
+  },
 ];
+
 
 const cardVariants = {
   offscreen: {
