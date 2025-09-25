@@ -9,7 +9,7 @@ import SocialMediaCard from "../navigator";
 
 const FloatingOrbs = dynamic(() => import("../FloatingOrbs"), { ssr: false });
 
-const images = ["/Ali2.png", "/Ali1.png", "/Ali2.png", "/Ali1.png"];
+const images = ["/Ali4.png", "/Ali1.png", "/Ali2.png", "/Ali1.png"];
 
 const Education = () => {
   const sliderSettings = {
@@ -29,7 +29,7 @@ const Education = () => {
     {
       icon: "📚",
       title: "Schooling",
-      description: "Studied at St. Paul’s English High School, Karachi (Class 1 - Matriculation), where I built my academic foundation. Currently in 1st year at PECHS Foundation College, expanding my knowledge and skills.",
+      description: "Studied at St. Paul’s English High School, Karachi (Class 1 - Matriculation), where I built my academic foundation. Currently in 2nd year at PECHS Foundation College, expanding my knowledge and skills.",
     },
    
     {
