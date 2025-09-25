@@ -9,7 +9,7 @@ import SocialMediaCard from "../navigator";
 
 const FloatingOrbs = dynamic(() => import("../FloatingOrbs"), { ssr: false });
 
-const images = ["/Ali4.png", "/Ali1.png", "/Ali2.png", "/Ali1.png"];
+const images = ["/Ali2.png", "/Ali1.png", "/Ali2.png", "/Ali1.png"];
 
 const Education = () => {
   const sliderSettings = {
